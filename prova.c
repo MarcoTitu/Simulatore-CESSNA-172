@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// ciao come va
 // Definizione della struttura del nodo
 typedef struct Node
 {
