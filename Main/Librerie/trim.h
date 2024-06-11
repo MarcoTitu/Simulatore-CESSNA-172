@@ -172,13 +172,17 @@ double rpm_trim_calc(double alpha_trim, double delta_e_trim, double V, double h,
     theta_trim = theta_trim*M_PI/180.0;
     P_max_h = engine[0]* pow(rho_h/(rho0),engine[1]);
 
+    printf("\nCalcolo spinta necessaria...\n");
+    double Cx_tot = interpola(alpha, Cx, alpha_trim) + Cx_alpha*alpha_trim*M_PI/180.0 + Cx_delta_e*delta_e_trim*M_PI/180.0;
+    double T_trim = m*g*sin(theta_trim) - 0.5*Cx_tot*rho*S*(V*V);
+    printf("Spinta: \t %lf [N]\n", T_trim);
+
+
     printf("\nCalcolo Parametri Motore...\n");
 
     while (RPM <= RPM_max){
         propel(V, RPM, rho);  // da propel.c
         double T = propThrust;
-        double Cx_tot = interpola(alpha, Cx, alpha_trim) + Cx_alpha*alpha_trim*M_PI/180.0 + Cx_delta_e*delta_e_trim*M_PI/180.0;
-        double T_trim = m*g*sin(theta_trim) - 0.5*Cx_tot*rho*S*(V*V);
         double condition = T_trim - T;
         double res = 2;
 
@@ -198,7 +202,7 @@ double rpm_trim_calc(double alpha_trim, double delta_e_trim, double V, double h,
     }
 
     if (RPM > RPM_max){
-        printf("WARNING: Convergenza non raggiunta su RPM; \nRPM impostati al valore medio\n");
+        printf("WARNING: Convergenza non raggiunta su RPM; RPM impostati al valore medio\n");
         RPM_trim = (RPM_max + RPM_min)/2;
         propel(V, RPM_trim, rho);  // da propel.c
         omega_trim = 2*M_PI/60*RPM_trim;
