@@ -5,6 +5,10 @@
 #include <stdlib.h>
 #include <math.h>
 
+#define RESET "\033[0m"
+#define GIALLO "\033[0;33m"
+#define ROSSO "\033[0;31m"
+
 double interpola(double alpha[126], double der_aerodinamica[126], double alpha_des) {
     int righe = 126;
     int indice_numero_vicino = 0;

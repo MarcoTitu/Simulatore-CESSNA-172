@@ -4,6 +4,10 @@
 #include "interpola.h"
 #include "propel.h"
 
+#define RESET "\033[0m"
+#define GIALLO "\033[0;33m"
+#define ROSSO "\033[0;31m"
+
 
 extern double engine[7];
 extern double general_data[30];
@@ -120,7 +124,7 @@ int alpha_trim_calc(double V, double h, double rho, double gamma, double g, doub
         if (fabs(condition) < res){
             alpha_trim = alpha_int;
             if (flag_eq_equilibratore != 0){
-                printf("WARNING: Non trovato valore di delta_e di trim\n");
+                printf(GIALLO "WARNING: Non trovato valore di delta_e di trim\n" RESET);
                 if(delta_e_trim<0){
                     delta_e_trim = delta_e_min;
                     printf("delta_e limitato a -20 deg\n");
@@ -141,7 +145,7 @@ int alpha_trim_calc(double V, double h, double rho, double gamma, double g, doub
     }
 
     if (alpha_int > alpha_max){
-        printf("ERRORE -5: Non trovato valore di alfa di trim\n");
+        printf(ROSSO "ERRORE -5: Non trovato valore di alfa di trim\n" RESET);
         printf("Premere invio per inserire una nuova condizione di trim...\n");
         getchar();
         getchar();
@@ -191,7 +195,7 @@ double rpm_trim_calc(double alpha_trim, double delta_e_trim, double V, double h,
             omega_trim = 2*M_PI/60*RPM_trim;
             P_trim = propTorque*omega_trim/1000; // [kW]
             if (P_trim > P_max_h){
-            printf("WARNING: Potenza massima superata\nPotenza limitata alla potenza massima\n");//Messaggio di warning
+            printf(GIALLO "WARNING: Potenza massima superata\nPotenza limitata alla potenza massima\n" RESET);//Messaggio di warning
             P_trim=P_max_h;
             }
             break;
@@ -202,7 +206,7 @@ double rpm_trim_calc(double alpha_trim, double delta_e_trim, double V, double h,
     }
 
     if (RPM > RPM_max){
-        printf("WARNING: Convergenza non raggiunta su RPM; RPM impostati al valore medio\n");
+        printf(GIALLO "WARNING: Convergenza non raggiunta su RPM; RPM impostati al valore medio\n" RESET);
         RPM_trim = (RPM_max + RPM_min)/2;
         propel(V, RPM_trim, rho);  // da propel.c
         omega_trim = 2*M_PI/60*RPM_trim;
