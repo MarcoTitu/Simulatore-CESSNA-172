@@ -5,6 +5,10 @@
 #include <math.h>
 #include <windows.h>
 
+#define RESET "\033[0m"
+#define GIALLO "\033[0;33m"
+#define ROSSO "\033[0;31m"
+
 extern double alpha[126];
 extern double general_data[30];
 extern double vett_stato[15];
@@ -28,7 +32,7 @@ int integrazione(double dt, double tMax){
 	FILE *fileCH, *fileRE;
     fileCH = fopen(nome_file_comandi, "r");
 	if(fileCH==NULL){
-		printf("\nERRORE -13: Errore apertura del file commandHistory%d.txt per la lettura", file_count);
+		printf(ROSSO "\nERRORE -13: Errore apertura del file commandHistory%d.txt per la lettura" RESET, file_count);
 		exit(-13);
 	}
 
@@ -40,7 +44,7 @@ int integrazione(double dt, double tMax){
     fileRE = fopen(nome_file_stato, "w");
 
 	if(fileCH==NULL){
-		printf("\nERRORE -14: Errore creazione del file simOutput%d.txt per la scrittura", file_count);
+		printf(ROSSO "\nERRORE -14: Errore creazione del file simOutput%d.txt per la scrittura" RESET, file_count);
 		exit(-14);
 	}
 
@@ -322,13 +326,13 @@ int integrazione(double dt, double tMax){
 		printf("%.2lf\t\t|%.1lf\t\t|%.1lf\n",throttle*100,T,enginePower/1000);
 
 		if(flag_alfa == -1){
-			printf("WARNING: Angolo d'attacco minore di alpha_min, imposto alpha = %d.", alpha[0]);
+			printf(GIALLO "WARNING: Angolo d'attacco minore di alpha_min, imposto alpha = %d." RESET, alpha[0]);
 		}
 		if(flag_alfa == 1){
-			printf("WARNING: Angolo d'attacco maggiore di alpha_max, imposto alpha = %d.", alpha[125]);
+			printf(GIALLO "WARNING: Angolo d'attacco maggiore di alpha_max, imposto alpha = %d." RESET, alpha[125]);
 		}
 		if(flag_enginePower == -1){
-			printf("WARNING: Potenza massima superata; Potenza limitata alla potenza massima");
+			printf(GIALLO "WARNING: Potenza massima superata; Potenza limitata alla potenza massima" RESET);
 		}
 
 		printCount++;
@@ -357,7 +361,7 @@ int integrazione(double dt, double tMax){
 		
 		
 		if (vett_stato[12] <= (mass_trim-m_fuel)){
-			printf("\nERRORE -7: Carburante terminato.\n");
+			printf(ROSSO "\nERRORE -7: Carburante terminato.\n" RESET);
             // printf("\nPremere invio per continuare");
             // getchar();
             // getchar();
@@ -368,7 +372,7 @@ int integrazione(double dt, double tMax){
 			return -7;
 		}
 		if (vett_stato[9] <=0){
-			printf("\nERRORE -8: Raggiunta quota nulla.\n");
+			printf(ROSSO "\nERRORE -8: Raggiunta quota nulla.\n" RESET);
             // printf("\nPremere invio per continuare");
             // getchar();
             // getchar();
@@ -380,7 +384,7 @@ int integrazione(double dt, double tMax){
 
 		}
         if (vett_stato[9] >=4116){
-			printf("\nERRORE -9: Raggiunta quota di tangenza (4116 m).\n");
+			printf(ROSSO "\nERRORE -9: Raggiunta quota di tangenza (4116 m).\n" RESET);
 			// printf("\nPremere invio per continuare");
             // getchar();
             // getchar();
@@ -392,7 +396,7 @@ int integrazione(double dt, double tMax){
 
 		}
 		if (sqrt(vett_stato[0]*vett_stato[0] + vett_stato[1]*vett_stato[1] + vett_stato[2]*vett_stato[2])<=30){
-            printf("\nERRORE -10: Raggiunta la velocita' di stallo (30 m/s).\n");
+            printf(ROSSO "\nERRORE -10: Raggiunta la velocita' di stallo (30 m/s).\n" RESET);
             // printf("\nPremere invio per continuare");
             // getchar();
             // getchar();
@@ -403,7 +407,7 @@ int integrazione(double dt, double tMax){
 			return -10;
 		}
 		if (sqrt(vett_stato[0]*vett_stato[0] + vett_stato[1]*vett_stato[1] + vett_stato[2]*vett_stato[2])>=75){
-			printf("ERRORE -11: Superata la velocita' massima (75 m/s).\n");
+			printf(ROSSO "ERRORE -11: Superata la velocita' massima (75 m/s).\n" RESET);
 			// printf("\n Premere invio per continuare");
             // getchar();
             // getchar();

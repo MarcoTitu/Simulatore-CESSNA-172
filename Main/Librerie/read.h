@@ -4,6 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define RESET "\033[0m"
+#define GIALLO "\033[0;33m"
+#define ROSSO "\033[0;31m"
+
 
 void readDba()
 {
@@ -32,7 +36,7 @@ void readDba()
 
     //Controllo su esistenza file
     if (file == NULL) {
-        printf("ERRORE -1: Errore apertura del file dba.txt per la lettura\n");
+        printf(ROSSO "ERRORE -1: Errore apertura del file dba.txt per la lettura\n" RESET);
         printf("Premere invio per chiudere");
         getchar();
         exit(-1);
@@ -276,7 +280,7 @@ void readEngine()
 
     //Controllo su esistenza file
     if (file == NULL) {
-        printf("ERRORE -2: Errore apertura del file engine.txt per la lettura\n");
+        printf(ROSSO "ERRORE -2: Errore apertura del file engine.txt per la lettura\n" RESET);
         printf("Premere invio per chiudere");
         getchar();
         exit(-2);
@@ -323,7 +327,7 @@ void readPropeller()
 
     //Controllo su esistenza file
     if (file == NULL) {
-        printf ("ERRORE -3: Errore apertura file propeller.txt per la lettura\n");
+        printf (ROSSO "ERRORE -3: Errore apertura file propeller.txt per la lettura\n" RESET);
         printf("Premere invio per chiudere");
         getchar();
         exit(-3);
