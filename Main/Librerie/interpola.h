@@ -5,21 +5,19 @@
 #include <stdlib.h>
 #include <math.h>
 
-double interpola(double alpha[126], double der_aerodinamica[126], double alpha_des)
-{
+double interpola(double alpha[126], double der_aerodinamica[126], double alpha_des) {
     int righe = 126;
     int indice_numero_vicino = 0;
     double differenza = alpha_des - alpha[0];
-    int i = 1;
+    int i=1;
 
     // Trova l'indice del vettore degli alpha, il cui valore � quel valore tabulato nel database aerodinamico che �
     // piu' vicino ad alfa desiderato e, contemporaneamente, minore di alfa desiderato
-    while (differenza >= 0 && i < 126)
-    {
+    while(differenza >= 0 && i<126){
         differenza = alpha_des - alpha[i];
         i++;
     }
-    indice_numero_vicino = i - 2;
+    indice_numero_vicino=i-2;
 
     // Calcola la derivata aerodinamica interpolata linearmente
     double delta_alpha = alpha_des - alpha[indice_numero_vicino];

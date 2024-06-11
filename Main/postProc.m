@@ -39,7 +39,7 @@ for i=2:4
     grid on
     ylabel(headers_sv(i), 'fontname', 'Times New Roman', 'FontSize', 14)
     xlabel("Time[s]", 'fontname', 'Times New Roman', 'FontSize', 14);
-    sgtitle ('Andamenti nel tempo di u, v, w', 'fontname', 'Times New Roman', 'FontSize', 16)
+    sgtitle ('Andamenti nel tempo di u, v, w', 'fontname', 'Times New Roman', 'FontSize', 16) 
 end
 
 figure(3)
@@ -49,7 +49,7 @@ for i=5:7
     grid on
     ylabel(headers_sv(i), 'fontname', 'Times New Roman', 'FontSize', 14)
     xlabel("Time[s]", 'fontname', 'Times New Roman', 'FontSize', 14);
-    sgtitle ('Andamenti nel tempo di p, q, r', 'fontname', 'Times New Roman', 'FontSize', 16)
+    sgtitle ('Andamenti nel tempo di p, q, r', 'fontname', 'Times New Roman', 'FontSize', 16) 
 end
 
 figure(4)
@@ -59,7 +59,7 @@ for i=8:10
     grid on
     ylabel(headers_sv(i), 'fontname', 'Times New Roman', 'FontSize', 14)
     xlabel("Time[s]", 'fontname', 'Times New Roman', 'FontSize', 14);
-    sgtitle ('Andamenti nel tempo di \phi, \theta, \psi', 'fontname', 'Times New Roman', 'FontSize', 16)
+    sgtitle ('Andamenti nel tempo di \phi, \theta, \psi', 'fontname', 'Times New Roman', 'FontSize', 16) 
 end
 
 figure(5)
@@ -67,7 +67,7 @@ plot(data_sv(:,1), data_sv(:,11),'b',LineWidth=2)
 grid on
 ylabel(headers_sv(11), 'fontname', 'Times New Roman', 'FontSize', 14)
 xlabel("Time[s]", 'fontname', 'Times New Roman', 'FontSize', 14);
-sgtitle ('Andamento nel tempo della quota', 'fontname', 'Times New Roman', 'FontSize', 16)
+sgtitle ('Andamento nel tempo della quota', 'fontname', 'Times New Roman', 'FontSize', 16) 
 
 figure(6)
 for i=11:13
@@ -76,7 +76,7 @@ for i=11:13
     grid on
     ylabel(headers_sv(i), 'fontname', 'Times New Roman', 'FontSize', 14)
     xlabel("Time[s]", 'fontname', 'Times New Roman', 'FontSize', 14)
-    sgtitle ('Andamenti nel tempo di quota, x, y', 'fontname', 'Times New Roman', 'FontSize', 16)
+    sgtitle ('Andamenti nel tempo di quota, x, y', 'fontname', 'Times New Roman', 'FontSize', 16) 
 end
 
 figure(7)
@@ -84,7 +84,7 @@ plot(data_sv(:,1), data_sv(:,14),'b',LineWidth=2)
 grid on
 ylabel(headers_sv(14), 'fontname', 'Times New Roman', 'FontSize', 14)
 xlabel("Time[s]", 'fontname', 'Times New Roman', 'FontSize', 14)
-sgtitle ('Andamento nel tempo della massa', 'fontname', 'Times New Roman', 'FontSize', 16)
+sgtitle ('Andamento nel tempo della massa', 'fontname', 'Times New Roman', 'FontSize', 16) 
 
 %% Plot velocità V
 figure(8)
@@ -163,7 +163,7 @@ plot(data_sv(:,1), data_sv(:,15),'b',LineWidth=2)
 grid on
 ylabel('Thrust [N]', 'fontname', 'Times New Roman', 'FontSize', 14)
 xlabel("Time[s]", 'fontname', 'Times New Roman', 'FontSize', 14)
-sgtitle ('Andamento nel tempo della spinta', 'fontname', 'Times New Roman', 'FontSize', 16)
+sgtitle ('Andamento nel tempo della spinta', 'fontname', 'Times New Roman', 'FontSize', 16) 
 
 
 

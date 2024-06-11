@@ -1,18 +1,18 @@
 #ifndef INTERPOL_H
 #define INTERPOL_H
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
 double interpola(double alpha[126], double der_aerodinamica[126], double alpha_des) {
+    extern int indice_numero_vicino;
+
     int righe = 126;
-    int indice_numero_vicino = 0;
     double differenza = alpha_des - alpha[0];
     int i=1;
 
-    // Trova l'indice del vettore degli alpha, il cui valore è quel valore tabulato nel database aerodinamico che è
+    // Trova l'indice del vettore degli alpha, il cui valore ï¿½ quel valore tabulato nel database aerodinamico che ï¿½
     // piu' vicino ad alfa desiderato e, contemporaneamente, minore di alfa desiderato
     while(differenza >= 0 && i<126){
         differenza = alpha_des - alpha[i];
