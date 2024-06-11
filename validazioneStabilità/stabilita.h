@@ -1,6 +1,8 @@
 #ifndef STABILITA_H_INCLUDED
 #define STABILITA_H_INCLUDED
 
+#define g 9.81
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -8,32 +10,12 @@
 // Il vettore CI � il vettore delle condizioni iniziali cos� definito: [V, h, gamma]
 // Abbiamo definito come costante g
 
-int stabilita (double delta_e_trim, double CI[], double rho, double alpha_trim, double g) {
-    
+void stabilita (double CmA_int, double Cm_int, double Cmde_int, double delta_e_trim,
+                double CI[3], double CXA_int, double Czalpha_int, double CmAP_int,
+                double CmQ_int, double Czap_int, double rho, double alpha_trim) {
+
     extern double general_data[30], alpha[126];
     extern double fugoide[4], CP[4];
-    extern double trim_angles[2];
-    extern double Cx[126], Cy[126], Cz[126], Cl[126], Cm[126], Cn[126];
-    extern double Cxa[126], Cxap[126], Cxu[126], Cxq[126], Cxb[126], Cxp[126], Cxr[126];
-    extern double Cyb[126], Cybp[126], Cyp[126], Cyr[126], Cya[126], Cyq[126];
-    extern double Czalpha[126], Czap[126], Czu[126], Czq[126], Czb[126], Czp[126], Czr[126];
-    extern double ClB[126], ClBP[126], ClP[126], ClR[126], ClA[126], ClQ[126];
-    extern double CmA[126], CmAP[126], CmU[126], CmQ[126], CmB[126], CmP[126], CmR[126];
-    extern double CnB[126], CnBP[126], CnP[126], CnR[126], CnA[126], CnQ[126];
-    extern double CXde[126], CXdle[126], CZde[126], CZdle[126], CYda[126], CYdr[126];
-    extern double Clda[126], Cldr[126], Cmde[126], Cmdle[126], Cnda[126], Cndr[126];
-    extern double CXom[126],CYom[126], CZom[126], Clom[126], Cmom[126], Cnom[126];
-
-    int flag_stabilita = 0;
-
-    double CmA_int = interpola(alpha, CmA, trim_angles[0]);
-    double Cm_int = interpola(alpha, Cm, trim_angles[0]);
-    double Cmde_int = interpola(alpha, Cmde, trim_angles[0]);
-    double CXA_int = interpola(alpha, Cxa, trim_angles[0]);
-    double Czalpha_int = interpola(alpha, Czalpha, trim_angles[0]);
-    double CmAP_int = interpola(alpha, CmAP, trim_angles[0]);
-    double CmQ_int = interpola(alpha, CmQ, trim_angles[0]);
-    double Czap_int = interpola(alpha, Czap, trim_angles[0]);
 
     double m = general_data[0];
     double S = general_data[2];
@@ -58,21 +40,18 @@ int stabilita (double delta_e_trim, double CI[], double rho, double alpha_trim, 
     double delta = B1*C1*D1 - A1*pow(D1,2) - pow(B1,2)*E1;
 
     if (E1<=0 || delta<=0){
-        printf("ERRORE -15: Velivolo instabile secondo il criterio di Routh\n");
-        flag_stabilita = -1;
+        printf("ERROR: le condizioni iniziali digitate (V, h, gamma) non permettono di avere un velivolo dinamicamente stabile. \nLa simulazione viene quindi interrotta.\n");
+        exit(EXIT_FAILURE);
     }
 
     else{
-        printf("\nIl velivolo risulta staticamente stabile.\n");
-        printf("Il velivolo risulta dinamicamente stabile secondo il criterio di Routh\n");
-
         double omegan_FUG = (2*CI[0]*CWe)/(sqrt(2)*mu*c);
         double zita_FUG = -CTu/(2*sqrt(2)*CWe);
         double eta_FUG = -zita_FUG*omegan_FUG;
         double omega_FUG = omegan_FUG*sqrt(1 - pow(zita_FUG,2));
         double T_FUG = (2*M_PI)/omega_FUG;
         double t_dimFUG = log(0.5)/eta_FUG;
-        fugoide[0] = omegan_FUG;
+        fugoide[0] = omega_FUG;
         fugoide[1] = zita_FUG;
         fugoide[2] = T_FUG;
         fugoide[3] = t_dimFUG;
@@ -87,19 +66,9 @@ int stabilita (double delta_e_trim, double CI[], double rho, double alpha_trim, 
         CP[1] = zita_CP;
         CP[2] = T_CP;
         CP[3] = t_dimCP;
-        printf("\n*************** MODI LONGITUDINALI ***************\n\n");
-        printf("FUGOIDE:		Pulsazione propria	= %lf rad/s\n", omegan_FUG);
-        printf("			Smorzamento		= %lf\n", zita_FUG);
-        printf("			Periodo			= %lf secondi\n", T_FUG);
-        printf("			Tempo di dimezzamento	= %lf secondi\n", t_dimFUG);
-
-        printf("CORTO PERIODO:	        Pulsazione propria	= %lf rad/s\n", omegan_CP);
-        printf("			Smorzamento		= %lf\n", zita_CP);
-        printf("			Periodo			= %lf secondi\n", T_CP);
-        printf("			Tempo di dimezzamento	= %lf secondi\n", t_dimCP);
     }
-    return flag_stabilita;
-}
+
+    }
 
 
 #endif

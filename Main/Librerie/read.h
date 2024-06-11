@@ -4,9 +4,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 void readDba()
 {
-    // Variabili esterne da manipolare
+    //Variabili esterne da manipolare
     extern double general_data[30];
     extern double alpha[126];
     extern double Cx[126], Cy[126], Cz[126], Cl[126], Cm[126], Cn[126];
@@ -18,354 +19,358 @@ void readDba()
     extern double CnB[126], CnBP[126], CnP[126], CnR[126], CnA[126], CnQ[126];
     extern double CXde[126], CXdle[126], CZde[126], CZdle[126], CYda[126], CYdr[126];
     extern double Clda[126], Cldr[126], Cmde[126], Cmdle[126], Cnda[126], Cndr[126];
-    extern double CXom[126], CYom[126], CZom[126], Clom[126], Cmom[126], Cnom[126];
+    extern double CXom[126],CYom[126], CZom[126], Clom[126], Cmom[126], Cnom[126];
+
 
     FILE *file;
     char filename[] = "../Main/Input/dba.txt";
     char ch;
-    int i = 0;
+    int i=0;
 
-    // Apertura file
+    //Apertura file
     file = fopen(filename, "r");
 
-    // Controllo su esistenza file
-    if (file == NULL)
-    {
+    //Controllo su esistenza file
+    if (file == NULL) {
         printf("ERRORE -1: Errore apertura del file dba.txt per la lettura\n");
         printf("Premere invio per chiudere");
         getchar();
         exit(-1);
     }
 
-    // Lettura file
-    while (i < 31)
-    { // lettura dati singoli
-        ch = fgetc(file);
 
-        if (ch != '*')
-        {
-            fseek(file, -1, SEEK_CUR);
-            fscanf(file, "%lf", &general_data[i]);
-            i++;
-        }
-
-        while ((ch != '\n') && (ch != EOF))
-        {
+    //Lettura file
+        while (i < 31) {                                 //lettura dati singoli
             ch = fgetc(file);
-        }
-    }
 
-    // lettura matrice SS
+                if (ch != '*') {
+                   fseek(file, -1, SEEK_CUR);
+                   fscanf(file, "%lf", &general_data[i]);
+                   i++;
+                }
+
+                while ((ch != '\n') && (ch != EOF)) {
+                    ch = fgetc(file);
+                }
+            }
+
+
+
+    //lettura matrice SS
     i = 0;
 
-    while ((ch = fgetc(file)) != EOF && i < 127)
-    {
+    while ((ch = fgetc(file)) != EOF && i < 127) {
 
-        if (ch != '*')
-        {
+        if (ch != '*') {
             fseek(file, -1, SEEK_CUR);
             fscanf(file, "%lf %lf %lf %lf %lf %lf %lf", &alpha[i], &Cx[i], &Cy[i], &Cz[i], &Cl[i], &Cm[i], &Cn[i]);
-            // printf("\n\n %lf %lf %lf %lf %lf %lf %lf i=%d", alpha[i], Cx[i], Cy[i], Cz[i], Cl[i], Cm[i], Cn[i], i);
+            //printf("\n\n %lf %lf %lf %lf %lf %lf %lf i=%d", alpha[i], Cx[i], Cy[i], Cz[i], Cl[i], Cm[i], Cn[i], i);
             i++;
         }
 
-        // Spostamento alla riga successiva ignornado il resto della riga attuale
-        while ((ch != '\n') && (ch != EOF))
-        {
+
+        //Spostamento alla riga successiva ignornado il resto della riga attuale
+        while ((ch != '\n') && (ch != EOF)) {
 
             ch = fgetc(file);
         }
+
     }
 
-    // lettura X force derivative
+
+
+    //lettura X force derivative
     i = 0;
 
-    while ((ch = fgetc(file)) != EOF && i < 127)
-    {
+    while ((ch = fgetc(file)) != EOF && i < 127) {
 
-        if (ch != '*')
-        {
+        if (ch != '*') {
             fseek(file, -1, SEEK_CUR);
             fscanf(file, "%*lf %lf %lf %lf %lf %lf %lf %lf", &Cxa[i], &Cxap[i], &Cxu[i], &Cxq[i], &Cxb[i], &Cxp[i], &Cxr[i]);
             i++;
         }
 
-        // Spostamento alla riga successiva ignornado il resto della riga attuale
-        while ((ch != '\n') && (ch != EOF))
-        {
+
+        //Spostamento alla riga successiva ignornado il resto della riga attuale
+        while ((ch != '\n') && (ch != EOF)) {
             ch = fgetc(file);
         }
+
     }
 
-    // lettura Y force derivative
+
+    //lettura Y force derivative
     i = 0;
 
-    while ((ch = fgetc(file)) != EOF && i < 127)
-    {
+    while ((ch = fgetc(file)) != EOF && i < 127) {
 
-        if (ch != '*')
-        {
+        if (ch != '*') {
             fseek(file, -1, SEEK_CUR);
             fscanf(file, "%*lf %lf %lf %lf %lf %lf %lf", &Cyb[i], &Cybp[i], &Cyp[i], &Cyr[i], &Cya[i], &Cyq[i]);
             i++;
         }
 
-        // Spostamento alla riga successiva ignornado il resto della riga attuale
-        while ((ch != '\n') && (ch != EOF))
-        {
+
+        //Spostamento alla riga successiva ignornado il resto della riga attuale
+        while ((ch != '\n') && (ch != EOF)) {
             ch = fgetc(file);
         }
+
     }
 
-    // lettura Z force derivative
+    //lettura Z force derivative
     i = 0;
 
-    while ((ch = fgetc(file)) != EOF && i < 127)
-    {
+    while ((ch = fgetc(file)) != EOF && i < 127) {
 
-        if (ch != '*')
-        {
+        if (ch != '*') {
             fseek(file, -1, SEEK_CUR);
             fscanf(file, "%*lf %lf %lf %lf %lf %lf %lf %lf", &Czalpha[i], &Czap[i], &Czu[i], &Czq[i], &Czb[i], &Czp[i], &Czr[i]);
             i++;
         }
 
-        // Spostamento alla riga successiva ignornado il resto della riga attuale
-        while ((ch != '\n') && (ch != EOF))
-        {
+
+        //Spostamento alla riga successiva ignornado il resto della riga attuale
+        while ((ch != '\n') && (ch != EOF)) {
             ch = fgetc(file);
         }
+
     }
 
-    // lettura rolling moment derivatives
+
+    //lettura rolling moment derivatives
     i = 0;
 
-    while ((ch = fgetc(file)) != EOF && i < 127)
-    {
+    while ((ch = fgetc(file)) != EOF && i < 127) {
 
-        if (ch != '*')
-        {
+        if (ch != '*') {
             fseek(file, -1, SEEK_CUR);
             fscanf(file, "%*lf %lf %lf %lf %lf %lf %lf", &ClB[i], &ClBP[i], &ClP[i], &ClR[i], &ClA[i], &ClQ[i]);
             i++;
         }
 
-        // Spostamento alla riga successiva ignornado il resto della riga attuale
-        while ((ch != '\n') && (ch != EOF))
-        {
+
+        //Spostamento alla riga successiva ignornado il resto della riga attuale
+        while ((ch != '\n') && (ch != EOF)) {
             ch = fgetc(file);
         }
+
     }
 
-    // lettura pitching moment derivatives
+    //lettura pitching moment derivatives
     i = 0;
 
-    while ((ch = fgetc(file)) != EOF && i < 127)
-    {
+    while ((ch = fgetc(file)) != EOF && i < 127) {
 
-        if (ch != '*')
-        {
+        if (ch != '*') {
             fseek(file, -1, SEEK_CUR);
             fscanf(file, "%*lf %lf %lf %lf %lf %lf %lf %lf", &CmA[i], &CmAP[i], &CmU[i], &CmQ[i], &CmB[i], &CmP[i], &CmR[i]);
             i++;
         }
 
-        // Spostamento alla riga successiva ignornado il resto della riga attuale
-        while ((ch != '\n') && (ch != EOF))
-        {
+
+        //Spostamento alla riga successiva ignornado il resto della riga attuale
+        while ((ch != '\n') && (ch != EOF)) {
             ch = fgetc(file);
         }
+
     }
 
-    // Yawing moment derivatives
+
+    //Yawing moment derivatives
     i = 0;
 
-    while ((ch = fgetc(file)) != EOF && i < 127)
-    {
+        while ((ch = fgetc(file)) != EOF && i < 127) {
 
-        if (ch != '*')
-        {
-            fseek(file, -1, SEEK_CUR);
-            fscanf(file, "%*lf %lf %lf %lf %lf %lf %lf", &CnB[i], &CnBP[i], &CnP[i], &CnR[i], &CnA[i], &CnQ[i]);
-            i++;
+            if (ch != '*') {
+                fseek(file, -1, SEEK_CUR);
+                fscanf(file, "%*lf %lf %lf %lf %lf %lf %lf", &CnB[i], &CnBP[i], &CnP[i], &CnR[i], &CnA[i], &CnQ[i]);
+                i++;
+            }
+
+
+            //Spostamento alla riga successiva ignornado il resto della riga attuale
+            while ((ch != '\n') && (ch != EOF)) {
+                ch = fgetc(file);
+            }
+
         }
 
-        // Spostamento alla riga successiva ignornado il resto della riga attuale
-        while ((ch != '\n') && (ch != EOF))
-        {
-            ch = fgetc(file);
-        }
-    }
 
-    // Control force derivatives
+    //Control force derivatives
     i = 0;
 
-    while ((ch = fgetc(file)) != EOF && i < 127)
-    {
+        while ((ch = fgetc(file)) != EOF && i < 127) {
 
-        if (ch != '*')
-        {
-            fseek(file, -1, SEEK_CUR);
-            fscanf(file, "%*lf %lf %lf %lf %lf %lf %lf", &CXde[i], &CXdle[i], &CZde[i], &CZdle[i], &CYda[i], &CYdr[i]);
-            i++;
+            if (ch != '*') {
+                fseek(file, -1, SEEK_CUR);
+                fscanf(file, "%*lf %lf %lf %lf %lf %lf %lf", &CXde[i], &CXdle[i], &CZde[i], &CZdle[i], &CYda[i], &CYdr[i]);
+                i++;
+            }
+
+
+            //Spostamento alla riga successiva ignornado il resto della riga attuale
+            while ((ch != '\n') && (ch != EOF)) {
+                ch = fgetc(file);
+            }
+
         }
 
-        // Spostamento alla riga successiva ignornado il resto della riga attuale
-        while ((ch != '\n') && (ch != EOF))
-        {
-            ch = fgetc(file);
-        }
-    }
-
-    // Control moment derivatives
+    //Control moment derivatives
     i = 0;
 
-    while ((ch = fgetc(file)) != EOF && i < 127)
-    {
+        while ((ch = fgetc(file)) != EOF && i < 127) {
 
-        if (ch != '*')
-        {
-            fseek(file, -1, SEEK_CUR);
-            fscanf(file, "%*lf %lf %lf %lf %lf %lf %lf", &Clda[i], &Cldr[i], &Cmde[i], &Cmdle[i], &Cnda[i], &Cndr[i]);
-            i++;
+            if (ch != '*') {
+                fseek(file, -1, SEEK_CUR);
+                fscanf(file, "%*lf %lf %lf %lf %lf %lf %lf", &Clda[i], &Cldr[i], &Cmde[i], &Cmdle[i], &Cnda[i], &Cndr[i]);
+                i++;
+            }
+
+
+            //Spostamento alla riga successiva ignornado il resto della riga attuale
+            while ((ch != '\n') && (ch != EOF)) {
+                ch = fgetc(file);
+            }
+
         }
 
-        // Spostamento alla riga successiva ignornado il resto della riga attuale
-        while ((ch != '\n') && (ch != EOF))
-        {
-            ch = fgetc(file);
-        }
-    }
 
-    // rotary derivatives
+
+    //rotary derivatives
     i = 0;
 
-    while ((ch = fgetc(file)) != EOF && i < 127)
-    {
+        while ((ch = fgetc(file)) != EOF && i < 127) {
 
-        if (ch != '*')
-        {
-            fseek(file, -1, SEEK_CUR);
-            fscanf(file, "%*lf %lf %lf %lf %lf %lf %lf", &CXom[i], &CYom[i], &CZom[i], &Clom[i], &Cmom[i], &Cnom[i]);
-            i++;
+            if (ch != '*') {
+                fseek(file, -1, SEEK_CUR);
+                fscanf(file, "%*lf %lf %lf %lf %lf %lf %lf", &CXom[i], &CYom[i], &CZom[i], &Clom[i], &Cmom[i], &Cnom[i]);
+                i++;
+            }
+
+
+            //Spostamento alla riga successiva ignornado il resto della riga attuale
+            while ((ch != '\n') && (ch != EOF)) {
+                ch = fgetc(file);
+            }
+
         }
 
-        // Spostamento alla riga successiva ignornado il resto della riga attuale
-        while ((ch != '\n') && (ch != EOF))
-        {
-            ch = fgetc(file);
-        }
-    }
-
-    // Chiusura file
+    //Chiusura file
     fclose(file);
+
 }
 
 void readEngine()
 {
-    // Variabili esterne da manipolare
+    //Variabili esterne da manipolare
     extern double engine[7];
 
     FILE *file;
     char filename[] = "../Main/Input/engine.txt";
     char ch;
-    int i = 0;
+    int i=0;
 
-    // Apertura file
+    //Apertura file
     file = fopen(filename, "r");
 
-    // Controllo su esistenza file
-    if (file == NULL)
-    {
+    //Controllo su esistenza file
+    if (file == NULL) {
         printf("ERRORE -2: Errore apertura del file engine.txt per la lettura\n");
         printf("Premere invio per chiudere");
         getchar();
         exit(-2);
     }
 
-    // Lettura file
-    while ((ch = fgetc(file)) != EOF)
-    {
 
-        if (ch != '*')
-        {
+    //Lettura file
+    while ((ch = fgetc(file)) != EOF) {
+
+        if (ch != '*') {
             fseek(file, -1, SEEK_CUR);
             fscanf(file, "%lf", &engine[i]);
             i++;
         }
 
-        // Spostamento alla riga successiva ignornado il resto della riga attuale
-        while ((ch != '\n') && (ch != EOF))
-        {
+
+        //Spostamento alla riga successiva ignornado il resto della riga attuale
+        while ((ch != '\n') && (ch != EOF)) {
             ch = fgetc(file);
         }
+
+
     }
 
-    // Chiusura file
+    //Chiusura file
     fclose(file);
 }
 
+
+
+
 void readPropeller()
 {
-    // Variabili esterne da manipolare
+    //Variabili esterne da manipolare
     extern double propeller_data[11], CSI[60], RD[60], CH[60], BA[60];
 
     FILE *file;
     char filename[] = "../Main/Input/propeller.txt";
     char ch;
-    int i = 0;
+    int i=0;
 
-    // Apertura file
+    //Apertura file
     file = fopen(filename, "r");
 
-    // Controllo su esistenza file
-    if (file == NULL)
-    {
-        printf("ERRORE -3: Errore apertura file propeller.txt per la lettura\n");
+    //Controllo su esistenza file
+    if (file == NULL) {
+        printf ("ERRORE -3: Errore apertura file propeller.txt per la lettura\n");
         printf("Premere invio per chiudere");
         getchar();
         exit(-3);
     }
 
-    // Lettura file
-    while (i < 12)
-    { // lettura dati singoli
+
+    //Lettura file
+    while (i < 12) {                                 //lettura dati singoli
         ch = fgetc(file);
 
-        if (ch != '*')
-        {
-            fseek(file, -1, SEEK_CUR);
-            fscanf(file, "%lf", &propeller_data[i]);
-            i++;
+            if (ch != '*') {
+               fseek(file, -1, SEEK_CUR);
+               fscanf(file, "%lf", &propeller_data[i]);
+               i++;
+            }
+
+            while ((ch != '\n') && (ch != EOF)) {
+                ch = fgetc(file);
+            }
         }
 
-        while ((ch != '\n') && (ch != EOF))
-        {
-            ch = fgetc(file);
-        }
-    }
+
 
     i = 0;
 
-    while ((ch = fgetc(file)) != EOF && i < 61)
-    {
+    while ((ch = fgetc(file)) != EOF && i < 61) {
 
-        if (ch != '*')
-        {
+        if (ch != '*') {
             fseek(file, -1, SEEK_CUR);
             fscanf(file, "%lf %lf %lf %lf", &CSI[i], &RD[i], &CH[i], &BA[i]);
             i++;
         }
 
-        // Spostamento alla riga successiva ignornado il resto della riga attuale
-        while ((ch != '\n') && (ch != EOF))
-        {
+
+        //Spostamento alla riga successiva ignornado il resto della riga attuale
+        while ((ch != '\n') && (ch != EOF)) {
             ch = fgetc(file);
         }
+
     }
 
-    // Chiusura file
+
+    //Chiusura file
     fclose(file);
+
 }
+
+
 
 #endif
