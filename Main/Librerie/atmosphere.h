@@ -61,7 +61,7 @@ int AtmosphereChoice(){
 
 
     if(f!=1||input!=1&&input!=2&&input!=3){
-        printf(ROSSO "Errore input, inserire 1,2 o 3\n" RESET);
+        printf("Errore input, inserire 1,2 o 3\n");
         system("pause");
         flagatm = -101;
         return flagatm;
@@ -129,6 +129,7 @@ int AtmosphereChoice(){
             scanf("%lf",&press0);
         }
         rho0=press0/(R*(temp0+273.15));
+        vsuono0=sqrt(gm_gas*R*(temp0+273.15));
         printf("\nNuove condizioni a quota 0m: \n\n");
         printf("\tPressione: \t\tP = %lf Pa\n",press0);
         printf("\tTemperatura: \t\tT = %lf C\n",temp0);
@@ -208,8 +209,8 @@ int AtmosphereChoice(){
         printf("Densita': \t\t%f [kg/m^3]\n",rho_h);
         printf("Quota: \t\t\t%f [m]\n",CI[1]);
         printf("Velocita': \t\t%f [m/s]\n",CI[0]);
-        printf("mach: \t\t\t%f\n",mach);
-        printf("angolo di rampa: \t%f [deg]\n",CI[2]);
+        printf("Mach: \t\t\t%f\n",mach);
+        printf("Angolo di rampa: \t%f [deg]\n",CI[2]);
     }
     return flagatm;       
 }
