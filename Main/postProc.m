@@ -25,9 +25,9 @@ for i=2:length(data_c(1,:))
     subplot(4,1,i-1);
     plot(data_c(:,1), data_c(:,i), 'b', LineWidth=2);
     grid on
-    ylabel(headers_c(i), 'fontname', 'Times New Roman', 'FontSize', 14);
-    xlabel("Time[s]", 'fontname', 'Times New Roman', 'FontSize', 14);
-    sgtitle('Andamenti nel tempo di \delta_e, \delta_a, \delta_r, \pi', 'fontname', 'Times New Roman', 'FontSize', 16);
+    % ylabel(headers_c(i), 'fontname', 'Times New Roman', 'FontSize', 14);
+    % xlabel("Time[s]", 'fontname', 'Times New Roman', 'FontSize', 14);
+    % sgtitle('Andamenti nel tempo di \delta_e, \delta_a, \delta_r, \pi', 'fontname', 'Times New Roman', 'FontSize', 16);
 end
 
 
