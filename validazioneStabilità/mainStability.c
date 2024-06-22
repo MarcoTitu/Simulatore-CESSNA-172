@@ -19,6 +19,7 @@ double CXom[126],CYom[126], CZom[126], Clom[126], Cmom[126], Cnom[126];
 
 double fugoide[4], CP[4];
 int indice_numero_vicino=0;
+int flag=0;
 
 int main()
 {
@@ -46,6 +47,11 @@ int main()
 	printf("\nAoA: %lf [deg]", alpha_trim);
 	printf("\ndelta_eq: %lf [deg]", delta_e_trim);
 	printf("\nQuota: 1000 [m]\n\n\n");
+	
+	printf("\n\nInserire 1 per utilizzare il trim predefinito, \ninserire 2 per inserire condizioni di riferimento personalizzate: ");
+	scanf("%d", &flag);
+	
+	if(flag==1){
 
     double CmA_int = interpola(alpha, CmA, alpha_trim);
     double Cm_int = interpola(alpha, Cm, alpha_trim);
@@ -59,8 +65,38 @@ int main()
     stabilita (CmA_int, Cm_int, Cmde_int, delta_e_trim, CI, CXA_int, Czalpha_int, CmAP_int, CmQ_int, Czap_int, rho, alpha_trim);
     printf("\n MODO FUGOIDE:\n pulsazione (parte immaginaria dell'autovalore) = %lf\n smorzamento = %lf\n periodo = %lf\n tempo di dimezzamento = %lf\n", fugoide[0], fugoide[1], fugoide[2], fugoide[3]);
     printf("\n MODO DI CORTO PERIODO:\n pulsazione (parte immaginaria dell'autovalore) = %lf\n smorzamento = %lf\n periodo = %lf\n tempo di dimezzamento = %lf\n\n", CP[0], CP[1], CP[2], CP[3]);
+	}
+	
+	if(flag==2){
+		
+	printf("\nInserire l'angolo d'attacco di trim (deg): ");
+	scanf("%lf", &alpha_trim);
 
+	printf("\nInserire la deflessione d'equilibratore al trim (deg): ");
+	scanf("%lf", &delta_e_trim);
 
+	printf("\nInserire la densita' dell'aria (kg/m3): ");
+	scanf("%lf", &rho);
+	
+	double CmA_int = interpola(alpha, CmA, alpha_trim);
+    double Cm_int = interpola(alpha, Cm, alpha_trim);
+    double Cmde_int = interpola(alpha, Cmde, alpha_trim);
+    double CXA_int = interpola(alpha, Cxa, alpha_trim);
+    double Czalpha_int = interpola(alpha, Czalpha, alpha_trim);
+    double CmAP_int = interpola(alpha, CmAP, alpha_trim);
+    double CmQ_int = interpola(alpha, CmQ, alpha_trim);
+    double Czap_int = interpola(alpha, Czap, alpha_trim);
+
+    stabilita (CmA_int, Cm_int, Cmde_int, delta_e_trim, CI, CXA_int, Czalpha_int, CmAP_int, CmQ_int, Czap_int, rho, alpha_trim);
+    printf("\n MODO FUGOIDE:\n pulsazione (parte immaginaria dell'autovalore) = %lf\n smorzamento = %lf\n periodo = %lf\n tempo di dimezzamento = %lf\n", fugoide[0], fugoide[1], fugoide[2], fugoide[3]);
+    printf("\n MODO DI CORTO PERIODO:\n pulsazione (parte immaginaria dell'autovalore) = %lf\n smorzamento = %lf\n periodo = %lf\n tempo di dimezzamento = %lf\n\n", CP[0], CP[1], CP[2], CP[3]);
+	
+	
+	}
+	
+	if(flag!=1 && flag!=2){
+		printf("\nErrore input! Inserire 1 o 2!\n Programma terminato.");
+	}
     system("pause");
     return 0;
 }
