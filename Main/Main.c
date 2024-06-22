@@ -115,8 +115,9 @@ int main(){
         printf("\nInizio analisi condizioni trim...\n");
 
         flag_alfa = alpha_trim_calc(CI[0], CI[1], rho_h, CI[2],g, trim_angles);
-        flag_RPM = rpm_trim_calc(trim_angles[0], trim_angles[1], CI[0], CI[1], rho_h, CI[2], g,engine[2], engine[3]);
+        
         if(flag_alfa == 0){
+            flag_RPM = rpm_trim_calc(trim_angles[0], trim_angles[1], CI[0], CI[1], rho_h, CI[2], g,engine[2], engine[3]);
             flag_stabilita = stabilita(trim_angles[1], CI, rho_h, trim_angles[0], g);
 			vett_stat_trim(trim_angles, vett_stato, CI); //Scrivi su vett di stato
 			vett_com_trim(trim_angles, vett_comm, RPM_trim); //Scrivi su vett comandi
