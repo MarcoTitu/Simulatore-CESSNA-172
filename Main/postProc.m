@@ -6,12 +6,12 @@ close all
 
 
 %% Read files
-FilePath_c=strcat(pwd,"\Input\commandHistory2.txt");
+FilePath_c=strcat(pwd,"\Input\commandHistory3.txt");
 dataTab_c = readtable(FilePath_c,'DecimalSeparator', '.','NumHeaderLines', 0);
 data_c=dataTab_c{:,:};
 headers_c=["t", "\delta_e [deg]","\delta_a [deg]","\delta_r [deg]","Manetta [%]"];
 
-FilePath_sv=strcat(pwd,"\Output\simOutput2.txt");
+FilePath_sv=strcat(pwd,"\Output\simOutput3.txt");
 dataTab_sv = readtable(FilePath_sv,'DecimalSeparator', '.','NumHeaderLines', 0);
 data_sv=dataTab_sv{:,:};
 headers_sv=["t", "u [m/s]", "v [m/s]", "w [m/s]", "p [rad/s]", "q [rad/s]", "r [rad/s]", "\phi [deg]", "\theta [deg]", "\psi [deg]", "h [m]", "x [m]", "y [m]", "m [kg]"];
