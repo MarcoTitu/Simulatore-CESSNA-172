@@ -82,14 +82,17 @@ end
 saveas(gcf, fullfile(cartella_destinazione, 'figure_angles.fig'));
 saveas(gcf, fullfile(cartella_destinazione, 'figure_angles.png'));
 close all
-
+%%
 figure(5)
 plot(data_sv(:,1), data_sv(:,11),'b',LineWidth=2)
 grid on
 ylabel(headers_sv(11), 'fontname', 'Times New Roman', 'FontSize', 14)
 xlabel("Time[s]", 'fontname', 'Times New Roman', 'FontSize', 14);
 sgtitle ('Andamento nel tempo della quota', 'fontname', 'Times New Roman', 'FontSize', 16) 
-
+saveas(gcf, fullfile(cartella_destinazione, 'figure_quota.png'));
+saveas(gcf, fullfile(cartella_destinazione, 'figure_quota.fig'));
+close all
+%%
 figure(6)
 for i=11:13
     subplot (3,1,i-10)
