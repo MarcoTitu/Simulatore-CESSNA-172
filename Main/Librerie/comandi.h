@@ -5,10 +5,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define RESET "\033[0m"
-#define GIALLO "\033[0;33m"
-#define ROSSO "\033[0;31m"
-
 #define step 0
 #define rampa 1
 #define impulso 2
@@ -37,7 +33,7 @@ void comandi_trim(double vett_com[]){
     fp = fopen(nome_file_comandi, "w");
 
     if(fp == NULL){
-        printf(ROSSO "ERRORE -12: Errore creazione del file commandHistory%d.txt per la scrittura\n" RESET, file_count);
+        printf("ERRORE -12: Errore creazione del file commandHistory%d.txt per la scrittura\n", file_count);
         exit(-12);
     }
 
@@ -81,13 +77,13 @@ void saturazione(double cur_com_vec[4], int che_comando, int com_max, int com_mi
     if (cur_com_vec[che_comando] > com_max) {
         cur_com_vec[che_comando] = com_max;
         if (check[che_comando] == 0) {
-            printf(GIALLO "\nWARNING: Comando di %s saturato a %d %s al tempo %.2lf s\n" RESET, sat_string, com_max, units, cur_timestep * timestep);
+            printf("\nWARNING: Comando di %s saturato a %d %s al tempo %.2lf s\n", sat_string, com_max, units, cur_timestep * timestep);
             check[che_comando] = 1;
         }
     } else if (cur_com_vec[che_comando] < com_min) {
         cur_com_vec[che_comando] = com_min;
         if (check[che_comando] == 0) {
-            printf(GIALLO "\nWARNING: Comando di %s saturato a %d %s al tempo %.2lf s\n" RESET, sat_string, com_min, units, cur_timestep * timestep);
+            printf("\nWARNING: Comando di %s saturato a %d %s al tempo %.2lf s\n", sat_string, com_min, units, cur_timestep * timestep);
             check[che_comando] = 1;
         }
     }
@@ -602,7 +598,7 @@ int genera_comandi(int final_timestep, double timestep, double baseline_com_vec[
     fileCH = fopen(nome_file_comandi, "w");
 
     if(fileCH == NULL){
-        printf(ROSSO "ERRORE -19: Errore apertura del file commandHistory%d.txt per la scrittura\n" RESET, file_count);
+        printf("ERRORE -19: Errore apertura del file commandHistory%d.txt per la scrittura\n", file_count);
         exit(-19);
     }
 

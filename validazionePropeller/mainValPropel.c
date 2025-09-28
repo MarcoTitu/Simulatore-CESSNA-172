@@ -21,8 +21,6 @@ double CXom[126],CYom[126], CZom[126], Clom[126], Cmom[126], Cnom[126];
 double propThrust, propTorque;
 double V,RPM,rho,h;
 
-int flag=0;
-
 int main()
 {
 
@@ -32,10 +30,6 @@ int main()
 	printf("\nValidazione implementazione Blade Element Theory");
 	printf("\n==================================================");
 
-	printf("\nInserire 1 per utilizzare condizioni di riferimento predefinite, \ninserire 2 per inserire condizioni di riferimento personalizzate: ");
-	scanf("%d", &flag);
-
-    if(flag==1){
 	printf("\nAlcune condizioni di riferimento sono riportate per verificare l'implementazione BET");
 
 
@@ -64,29 +58,6 @@ int main()
 
 	printf("\nRisultati BET: ");
 	printf("\nSpinta[N]= %lf \nCoppia[Nm]= %lf\n", propThrust, propTorque);
-	}
-
-	if(flag==2){
-
-	printf("\nInserire la velocita' di volo: ");
-	scanf("%lf", &V);
-
-	printf("\nInserire gli RPM: ");
-	scanf("%lf", &RPM);
-
-	printf("\nInserire la densita' dell'aria: ");
-	scanf("%lf", &rho);
-
-	propel(V,RPM,rho);
-
-	printf("\nRisultati BET: ");
-	printf("\nSpinta[N]= %lf \nCoppia[Nm]= %lf\n", propThrust, propTorque);
-
-	}
-
-	if(flag!=1 && flag!=2){
-		printf("\nErrore input! Inserire 1 o 2!\n Programma terminato.");
-	}
 
     system("pause");
     return 0;

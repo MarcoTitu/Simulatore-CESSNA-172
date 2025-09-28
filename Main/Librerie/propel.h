@@ -5,10 +5,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define RESET "\033[0m"
-#define GIALLO "\033[0;33m"
-#define ROSSO "\033[0;31m"
-
 //NELLA SEGUENTE FUNIONE SI CALCOLANO LE PRESTAZIONI DELL'ELICA SFRUTTANDO LA TEORIA DELL'ELEMENTO DI PALA DI GLAUERT
 
 void propel(double V, double RPM, double rho)
@@ -126,7 +122,16 @@ void propel(double V, double RPM, double rho)
     else{
         eff=t/q*J/(2.0*M_PI); //efficienza elica
     }
-
+    
+    // FILE *fpt;
+    // if(wr==1)
+    // {fpt = fopen("../Main/Output/output_TEP.txt", "w+"); //file per salvataggio dati di output della libreria
+    // if(fpt==NULL)
+    // {
+    //     printf("ERRORE -14: Impossibile apertura file output_TEP.txt per la scrittura\n");exit(-14);
+    // }
+    // fprintf(fpt,"Thrust %lf [N]\nTorque %lf [Nm]\nCt %lf\nCq %lf\nEfficiency %lf\n",output.thrust,output.torque,output.ct,output.cq,output.eff);}
+    // return output;
 }
 
 

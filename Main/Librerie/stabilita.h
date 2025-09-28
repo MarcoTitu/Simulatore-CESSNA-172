@@ -5,10 +5,6 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define RESET "\033[0m"
-#define GIALLO "\033[0;33m"
-#define ROSSO "\033[0;31m"
-
 // Il vettore CI � il vettore delle condizioni iniziali cos� definito: [V, h, gamma]
 // Abbiamo definito come costante g
 
@@ -62,7 +58,7 @@ int stabilita (double delta_e_trim, double CI[], double rho, double alpha_trim, 
     double delta = B1*C1*D1 - A1*pow(D1,2) - pow(B1,2)*E1;
 
     if (E1<=0 || delta<=0){
-        printf(ROSSO "ERRORE -15: Velivolo instabile secondo il criterio di Routh\n" RESET);
+        printf("ERRORE -15: Velivolo instabile secondo il criterio di Routh\n");
         flag_stabilita = -1;
     }
 

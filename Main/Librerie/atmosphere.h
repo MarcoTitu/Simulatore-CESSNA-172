@@ -7,12 +7,6 @@
 #include <math.h>
 #include <ctype.h>
 
-#define RESET "\033[0m"
-#define GIALLO "\033[0;33m"
-#define ROSSO "\033[0;31m"
-
-
-
 int atmospherecalc(double h, double V){
     extern double press0, temp0, rho0, vsuono0;    // Valori atmosfera a quota 0 
     extern double press_h ,temp_h ,rho_h, vsuono_h, mach;    // Valori atmosfera a quota h scelta
@@ -29,7 +23,7 @@ int atmospherecalc(double h, double V){
     mach = V/vsuono_h;
     if(mach > 0.6){
         flagatm = -1;
-        printf(ROSSO "ERRORE -4: Mach= %.2lf superiore al Mach di Drag Divergence (M_DD=0.6)\n" RESET,mach);
+        printf("ERRORE -4: Mach= %.2lf superiore al Mach di Drag Divergence (M_DD=0.6)\n",mach);
     }else{
         flagatm = 0;
     }
@@ -71,14 +65,14 @@ int AtmosphereChoice(){
         printf("Inserire la quota di volo in m [0-4116]\t\t");
         scanf("%lf",&CI[1]);
         if(CI[1]>4116){
-            printf(GIALLO "WARNING: Quota superiore a quota di tangenza, ripetere immissione dati\nPremere invio per procedere" RESET);
+            printf("WARNING: Quota superiore a quota di tangenza, ripetere immissione dati\nPremere invio per procedere");
             getchar();
             getchar();
             flagatm=-102;
             return flagatm;
         }
         if(CI[1]<0){
-            printf(GIALLO "WARNING: Quota troppo bassa, ripetere immissione dati\nPremere invio per procedere" RESET);
+            printf("WARNING: Quota troppo bassa, ripetere immissione dati\nPremere invio per procedere");
             getchar();
             getchar();
             flagatm=-102;
@@ -87,14 +81,14 @@ int AtmosphereChoice(){
         printf("Inserire la velocita' di volo in m/s [30-75]\t");
         scanf("%lf", &CI[0]);
         if(CI[0]>75){
-            printf(GIALLO "WARNING: Velocita' superiore alla V_NE (146 KIAS-75 m/s), ripetere immissione dati\nPremere invio per procedere" RESET);
+            printf("WARNING: Velocita' superiore alla V_NE (146 KIAS-75 m/s), ripetere immissione dati\nPremere invio per procedere");
             getchar();
             getchar();
             flagatm=-105;
             return flagatm;
         }
         if(CI[0]<30){
-            printf(GIALLO "WARNING: Velocita' inferiore alla velocita' minima (58 KIAS-30 m/s), ripetere immissione dati\nPremere invio per procedere" RESET);
+            printf("WARNING: Velocita' inferiore alla velocita' minima (58 KIAS-30 m/s), ripetere immissione dati\nPremere invio per procedere");
             getchar();
             getchar();
             flagatm=-105;
@@ -129,7 +123,6 @@ int AtmosphereChoice(){
             scanf("%lf",&press0);
         }
         rho0=press0/(R*(temp0+273.15));
-        vsuono0=sqrt(gm_gas*R*(temp0+273.15));
         printf("\nNuove condizioni a quota 0m: \n\n");
         printf("\tPressione: \t\tP = %lf Pa\n",press0);
         printf("\tTemperatura: \t\tT = %lf C\n",temp0);
@@ -147,7 +140,7 @@ int AtmosphereChoice(){
         printf("Inserire la pressione in Pa\t");
         scanf("%lf",&press_h);
         if(press_h<0){
-            printf(GIALLO "WARNING: Pressione minore di 0 Pa, ripetere immissione dati\nPremere invio per procedere" RESET);
+            printf("WARNING: Pressione minore di 0 Pa, ripetere immissione dati\nPremere invio per procedere");
             getchar();
             getchar();
             flagatm=-103;
@@ -156,14 +149,14 @@ int AtmosphereChoice(){
         printf("Inserire la quota di volo in m [0-4116]\t\t");
         scanf("%lf",&CI[1]);
         if(CI[1]>4116){
-            printf(GIALLO "WARNING: Quota superiore a quota di tangenza, ripetere immissione dati\nPremere invio per procedere" RESET);
+            printf("WARNING: Quota superiore a quota di tangenza, ripetere immissione dati\nPremere invio per procedere");
             getchar();
             getchar();
             flagatm=-102;
             return flagatm;
         }
         if(CI[1]<0){
-            printf(GIALLO "WARNING: Quota troppo bassa, ripetere immissione dati\nPremere invio per procedere" RESET);
+            printf("WARNING: Quota troppo bassa, ripetere immissione dati\nPremere invio per procedere");
             getchar();
             getchar();
             flagatm=-102;
@@ -172,14 +165,14 @@ int AtmosphereChoice(){
         printf("Inserire la velocita' di volo in m/s [30-75]\t");
         scanf("%lf",&CI[0]);
         if(CI[0]>75){
-            printf(GIALLO "WARNING: Velocita' superiore alla V_NE (146 KIAS-75 m/s), ripetere immissione dati\nPremere invio per procedere" RESET);
+            printf("WARNING: Velocita' superiore alla V_NE (146 KIAS-75 m/s), ripetere immissione dati\nPremere invio per procedere");
             getchar();
             getchar();
             flagatm=-105;
             return flagatm;
         }
         if(CI[0]<30){
-            printf(GIALLO "WARNING: Velocita' inferiore alla velocita' minima (58 KIAS-30 m/s), ripetere immissione dati\nPremere invio per procedere" RESET);
+            printf("WARNING: Velocita' inferiore alla velocita' minima (58 KIAS-30 m/s), ripetere immissione dati\nPremere invio per procedere");
             getchar();
             getchar();
             flagatm=-105;
@@ -192,7 +185,7 @@ int AtmosphereChoice(){
         mach=CI[0]/vsuono_h;
         flagatm=0;
         if(mach>0.6){
-        printf(ROSSO "ERRORE -10: Mach=%.2f superiore al Mach di Drag Divergence (M_DD=0.6)\n" RESET,mach);
+        printf("ERRORE -10: Mach=%.2f superiore al Mach di Drag Divergence (M_DD=0.6)\n",mach);
         flagatm=-1;
         }
     }
@@ -209,8 +202,8 @@ int AtmosphereChoice(){
         printf("Densita': \t\t%f [kg/m^3]\n",rho_h);
         printf("Quota: \t\t\t%f [m]\n",CI[1]);
         printf("Velocita': \t\t%f [m/s]\n",CI[0]);
-        printf("Mach: \t\t\t%f\n",mach);
-        printf("Angolo di rampa: \t%f [deg]\n",CI[2]);
+        printf("mach: \t\t\t%f\n",mach);
+        printf("angolo di rampa: \t%f [deg]\n",CI[2]);
     }
     return flagatm;       
 }
