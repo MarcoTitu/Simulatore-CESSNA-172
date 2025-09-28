@@ -14,7 +14,7 @@
 #include "..\Main\Librerie\comandi.h"
 
 // Variabili
-// prova
+
 double engine[7];                                           // Variabili lette dal file engine.txt
 double propeller_data[11], CSI[60], RD[60], CH[60], BA[60]; // Variabili lette dal file propeller.txt
 double general_data[30], alpha[126];                        // dati generali letti dal file dba.txt
